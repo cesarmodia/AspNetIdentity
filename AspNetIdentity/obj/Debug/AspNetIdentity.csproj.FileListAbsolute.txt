@@ -69,6 +69,6 @@ c:\users\cmorales\documents\visual studio 2015\Projects\AspNetIdentity\AspNetIde
 c:\users\cmorales\documents\visual studio 2015\Projects\AspNetIdentity\AspNetIdentity\bin\System.Web.WebPages.Razor.xml
 c:\users\cmorales\documents\visual studio 2015\Projects\AspNetIdentity\AspNetIdentity\bin\Antlr3.Runtime.pdb
 c:\users\cmorales\documents\visual studio 2015\Projects\AspNetIdentity\AspNetIdentity\bin\Newtonsoft.Json.xml
-c:\users\cmorales\documents\visual studio 2015\Projects\AspNetIdentity\AspNetIdentity\obj\Debug\AspNetIdentity.csprojResolveAssemblyReference.cache
 c:\users\cmorales\documents\visual studio 2015\Projects\AspNetIdentity\AspNetIdentity\obj\Debug\AspNetIdentity.dll
 c:\users\cmorales\documents\visual studio 2015\Projects\AspNetIdentity\AspNetIdentity\obj\Debug\AspNetIdentity.pdb
+C:\Users\cmorales\Documents\Visual Studio 2015\Projects\AspNetIdentity\AspNetIdentity\obj\Debug\AspNetIdentity.csprojResolveAssemblyReference.cache

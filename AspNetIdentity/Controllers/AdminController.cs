@@ -62,7 +62,6 @@ namespace AspNetIdentity.Controllers
             }
             return View(vm);
         }
-
         private void registrarErrores(IdentityResult resultado)
         {
             if (resultado != null)
@@ -72,6 +71,87 @@ namespace AspNetIdentity.Controllers
                     ModelState.AddModelError(string.Empty, detalleError);
                 }
             }
+        }
+        [HttpPost]
+        public async Task<ActionResult> Delete(string id)
+        {
+            GestionUsuarios gestionUsuarios = ObtenerGestionUsuarios();
+            Usuario usuario = await gestionUsuarios.FindByIdAsync(id);
+
+            if (usuario != null)
+            {
+                IdentityResult resultado = await gestionUsuarios.DeleteAsync(usuario);
+                if (resultado.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View("Error", resultado.Errors);
+                }
+            }
+            else
+            {
+                return View("Error", new string[] { "Usuario no encontrado" });
+            }
+        }
+        [HttpGet]
+        public async Task<ActionResult> Edit(string id)
+        {
+            GestionUsuarios gestionUsuarios = ObtenerGestionUsuarios();
+
+            Usuario usuario = await gestionUsuarios.FindByIdAsync(id);
+            if (usuario != null)
+            {
+                return View(usuario);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+        public async Task<ActionResult> Edit(string id, string Email, string PhoneNumber, string Password)
+        {
+            GestionUsuarios gestionUsuarios = ObtenerGestionUsuarios();
+            
+            Usuario usuario = await gestionUsuarios.FindByIdAsync(id);
+
+            if (usuario != null)
+            {
+                usuario.Email = Email;
+                usuario.PhoneNumber = PhoneNumber;
+
+                if (!string.IsNullOrEmpty(Password))
+                {
+                    IdentityResult validacionClave = await gestionUsuarios.PasswordValidator.ValidateAsync(Password);
+                    if (validacionClave.Succeeded)
+                    {
+                        usuario.PasswordHash = gestionUsuarios.PasswordHasher.HashPassword(Password);
+                        IdentityResult resultado = await gestionUsuarios.UpdateAsync(usuario);
+                        if (resultado.Succeeded)
+                        {
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            registrarErrores(resultado);
+                        }
+                    }
+                    else
+                    {
+                        registrarErrores(validacionClave);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "La clave no puede estar vacía");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", "Usuario no encontrado");
+            }
+            return View(usuario);
         }
     }
 }

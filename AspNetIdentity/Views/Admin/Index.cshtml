@@ -16,10 +16,11 @@
                 <th>Nombre</th>
                 <th>e-Mail</th>
                 <th>Teléfono</th>
+                <th></th>
             </tr>
             @if (Model.Count() == 0)
             {
-                <tr><td colspan="4" class="text-center">No hay usuarios registrados</td></tr>
+                <tr><td colspan="5" class="text-center">No hay usuarios registrados</td></tr>
             }
             else
             {
@@ -30,6 +31,13 @@
                         <td>@usuario.UserName</td>
                         <td>@usuario.Email</td>
                         <td>@usuario.PhoneNumber</td>
+                        <td>
+                            @using (Html.BeginForm("Delete", "Admin", new { id = usuario.Id }))
+                            {
+                                @Html.ActionLink("Editar", "Edit", new { id = usuario.Id }, new { @class = "btn btn-primary btn-xs" })
+                                <button class="btn btn-danger btn-xs" type="submit">Borrar</button>
+                            }
+                        </td>
                     </tr>
                 }
             }

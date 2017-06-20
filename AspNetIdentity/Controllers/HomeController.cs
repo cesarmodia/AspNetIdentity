@@ -10,6 +10,7 @@ namespace AspNetIdentity.Controllers
     {
         public ActionResult Index()
         {
+            EF.ContextoIdentity.
             return View();
         }
 

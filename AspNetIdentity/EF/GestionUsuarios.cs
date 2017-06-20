@@ -20,7 +20,14 @@ namespace AspNetIdentity.EF
         {
             ContextoIdentity baseDatos = contexto.Get<ContextoIdentity>();
             GestionUsuarios gestionUsuarios = new GestionUsuarios(new UserStore<Usuario>(baseDatos));
-
+            gestionUsuarios.PasswordValidator = new PasswordValidator
+            {
+                RequiredLength = 6,
+                RequireNonLetterOrDigit = true,
+                RequireDigit = true,
+                RequireLowercase = true,
+                RequireUppercase = true
+            };
             return gestionUsuarios;
         }
     }
